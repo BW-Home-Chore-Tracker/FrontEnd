@@ -32,25 +32,16 @@ export default function Parent() {
             <div className={classes.form}>
                 <div>
                 <TextField
-                    id="outlined-basic"
+                    id="name"
                     className={classes.textField}
-                    label="First Name"
+                    label="Name"
                     margin="normal"
                     variant="outlined"
                 />
                 </div>
                 <div>
                 <TextField
-                    id="outlined-basic"
-                    className={classes.textField}
-                    label="Last Name"
-                    margin="normal"
-                    variant="outlined"
-                />
-                </div>
-                <div>
-                <TextField
-                    id="outlined-basic"
+                    id="username"
                     className={classes.textField}
                     label="Username"
                     margin="normal"
@@ -59,7 +50,7 @@ export default function Parent() {
                 </div>
                 <div>
                 <TextField
-                    id="outlined-basic"
+                    id="email"
                     className={classes.textField}
                     label="Email"
                     type="email"
@@ -70,7 +61,7 @@ export default function Parent() {
                 </div>
                 <div>
                     <TextField
-                    id="outlined-password-input"
+                    id="password-input"
                     label="Password"
                     className={classes.textField}
                     type="password"

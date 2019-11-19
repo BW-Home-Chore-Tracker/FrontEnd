@@ -22,6 +22,7 @@ export default function Chores(props) {
         setChores([...chores, {[e.target.name]: e.target.value}])
     }
 
+
     // Styling form
 
     const useStyles = makeStyles(theme => ({
@@ -44,7 +45,7 @@ export default function Chores(props) {
       const classes = useStyles();
       
     return (
-        <form className={classes.container} noValidate autoComplete="off">
+        <form className={classes.container} noValidate autoComplete="off" >
         
             <div className={classes.form}>
                 <div>
@@ -54,7 +55,6 @@ export default function Chores(props) {
                     label="Chore Name"
                     margin="normal"
                     variant="outlined"
-                    placeholder="Chore Name"
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -69,7 +69,6 @@ export default function Chores(props) {
                     type="textarea"
                     margin="normal"
                     variant="outlined"
-                    placeholder="Chore Description"
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -83,7 +82,6 @@ export default function Chores(props) {
                     label="Child's Name"
                     margin="normal"
                     variant="outlined"
-                    placeholder="Child's Name"
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -97,7 +95,6 @@ export default function Chores(props) {
                     type="number"
                     margin="normal"
                     variant="outlined"
-                    placeholder="Chore Score"
                     InputLabelProps={{
                         shrink: true,
                     }}
