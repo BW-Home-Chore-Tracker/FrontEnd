@@ -1,13 +1,12 @@
 import axios from 'axios';
 
 const axiosWithAuth = () => {
-    const token = localStorage.getItem('token');
-    return axios.create({
-        //baseURL: 'http://',
-        headers: {
-            Authorization: token
 
-        }
+    return axios.create({
+        headers: {
+            Authorization: localStorage.getItem('token')
+        },
+        baseURL: "https://chore-tracker-bw.herokuapp.com/"
     });
 };
 export default axiosWithAuth;
