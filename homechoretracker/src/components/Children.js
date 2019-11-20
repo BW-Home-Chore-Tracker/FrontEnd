@@ -61,7 +61,7 @@ export default function Children() {
 	};
 	const submitForm = e => {
 		e.preventDefault();
-		setChildren([...children]);
+		
 	};
 
 	return (

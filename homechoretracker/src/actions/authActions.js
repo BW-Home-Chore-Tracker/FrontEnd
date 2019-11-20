@@ -1,4 +1,6 @@
 import axiosWithAuth from '../components/axiosWithAuth';
+import axios from 'axios';
+
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
@@ -11,24 +13,27 @@ export const LOGOUT_FAIL = "LOGOUT_FAIL";
 export const WELCOME_BACK = "WELCOME_BACK";
 
 export const doSignIn = users => dispatch => {
-    axiosWithAuth().post('/users/login', users)
-        .then(response => {
-            localStorage.setItem('token', response.data.payload);
-            this.props.history.push('/protected');
+    dispatch({ type: LOGIN_START })
+    axiosWithAuth().post('https://chore-tracker-bw.herokuapp.com/users/login', users)
+        .then(response =>
+            dispatch({ type: LOGIN_SUCCESS, payload: response.data })
+        )
+        .catch(error => {
+            dispatch({ type: LOGIN_FAIL, payload: error })
         })
-
 };
 
 export const doCreateAccount = user => dispatch => {
-    axiosWithAuth().post('/users/register', user)
-        .then(res => {
-            localStorage.setItem('token', res.data.payload);
-            this.props.history.push('protected');
+    dispatch({ type: CREATE_USER_START })
+    axios.post('https://chore-tracker-bw.herokuapp.com/users/register', user)
+        .then(res =>
+            dispatch({ type: CREATE_USER_SUCCESS, payload: res.data })
+        )
+        .catch(err => {
+            dispatch({ type: CREATE_USER_FAIL, payload: err });
         })
-        .catch(err => console.log(err));
-};
 
-
+}
 export const doSignOut = () => dispatch => {
     dispatch({ type: LOGOUT_START });
     try {

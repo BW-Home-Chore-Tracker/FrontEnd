@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
-import Parent from "./components/Parent";
+import Parent from "./components/SignIn";
 import Chores from "./components/Chores";
 import "./App.css";
 import Children from "./components/Children";
