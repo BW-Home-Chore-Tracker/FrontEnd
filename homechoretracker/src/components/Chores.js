@@ -4,23 +4,33 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-export default function Chores(props) {
-    const [chores, setChores] = useState([])
+export default function Chores() {
+    const [chores, setChores] = useState([{
+        name: "",
+        description: "",
+        childs_name: "",
+        chore_score: "",
+        due_date: ""
+    }])
     
     useEffect(() => {
         axios.get('https://chore-tracker-bw.herokuapp.com/chores')
         .then(response => {
             console.log(response);
-            setChores(response.data)
+            setChores(response.data) 
         })
         .catch(error => {
-            console.log("Sorry, no photos.", error)
+            console.log("Sorry, no chores.", error)
         })
     }, [])
 
     const addChore = e => {
         setChores([...chores, {[e.target.name]: e.target.value}])
     }
+
+    const handleChange = e => {
+        setChores({...chores, [e.target.name]: e.target.value });
+      };
 
 
     // Styling form
@@ -45,7 +55,7 @@ export default function Chores(props) {
       const classes = useStyles();
       
     return (
-        <form className={classes.container} noValidate autoComplete="off" >
+        <form className={classes.container} noValidate autoComplete="off">
         
             <div className={classes.form}>
                 <div>
@@ -55,6 +65,7 @@ export default function Chores(props) {
                     label="Chore Name"
                     margin="normal"
                     variant="outlined"
+                    onChange={handleChange}
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -69,6 +80,7 @@ export default function Chores(props) {
                     type="textarea"
                     margin="normal"
                     variant="outlined"
+                    onChange={handleChange}
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -82,6 +94,7 @@ export default function Chores(props) {
                     label="Child's Name"
                     margin="normal"
                     variant="outlined"
+                    onChange={handleChange}
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -95,6 +108,7 @@ export default function Chores(props) {
                     type="number"
                     margin="normal"
                     variant="outlined"
+                    onChange={handleChange}
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -108,6 +122,7 @@ export default function Chores(props) {
                     type="date"
                     margin="normal"
                     variant="outlined"
+                    onChange={handleChange}
                     InputLabelProps={{
                         shrink: true,
                     }}
