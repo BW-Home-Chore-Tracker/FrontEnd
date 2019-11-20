@@ -27,7 +27,7 @@ class UpdateChoresForm extends Component {
                 <form>
                     <input required type="text" />
                     <input type="text"
-                        {/* <button onClick={()=>thisprops.dispatch(type:'EDIT_CHORE',)} */}
+                        {/* <button onClick={()=>thisprops.dispatch(type:'EDIT_CHORE',chore)} */}
                         {/* <button onClick={() =>this.props.dispatch({type:'DELETE_CHORE', id:this.props.chore.id})}>Delete Chore</button> */}
                 </form>
             </div>

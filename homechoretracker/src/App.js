@@ -16,12 +16,14 @@ function App() {
 
     <Router>
       <div className="App">
-        <Link to="protected">Parent</Link>
-        <Link to="/children">Children</Link>
-        {/* <Link to="/protected">Parent</Link> */}
+        <header>
+          <Link to="/login">Login</Link><br />
+          {/* <Link to="protected">Parent</Link> */}
+          <Link to="/children">Children</Link>
+        </header>
         <Switch>
-          <Route exact path="/" component={Login} />
-          <PrivateRoute exact path="/protected" component={Parent} />
+          <Route exact path="/" component={Parent} />
+          <PrivateRoute exact path="/protected" component={Children} />
           {/* <Route path="/protected" component={Children} /> */}
 
           <Route path="/chores" component={Chores} />

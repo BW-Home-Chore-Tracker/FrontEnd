@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-
+import { connect } from 'react-redux';
+import { doCreateAccount } from '../actions/authActions';
 
 
 // Form and form styling
@@ -25,7 +26,11 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Parent = () => {
+const Parent = props => {
+    const fetchParent = e => {
+        e.preventDefault();
+        props.doCreateAccount();
+    }
     const classes = useStyles();
 
     return (
@@ -39,6 +44,7 @@ const Parent = () => {
                         label="Name"
                         margin="normal"
                         variant="outlined"
+
                     />
                 </div>
                 <div>
@@ -48,6 +54,7 @@ const Parent = () => {
                         label="Username"
                         margin="normal"
                         variant="outlined"
+
                     />
                 </div>
                 <div>
@@ -58,6 +65,7 @@ const Parent = () => {
                         type="email"
                         margin="normal"
                         variant="outlined"
+
 
                     />
                 </div>
@@ -72,14 +80,15 @@ const Parent = () => {
                         variant="outlined"
                     />
                 </div>
-                <Button variant="contained" className={classes.button}>
+                <Button variant="contained" className={classes.button} onClick={fetchParent}>
                     Sign Up
                 </Button>
             </div>
         </form>
     )
 }
-export default Parent;
+const mapStateToProps = state => ({ user: state.user, error: state.error });
+export default connect(mapStateToProps, { doCreateAccount })(Parent);
 
 
 
