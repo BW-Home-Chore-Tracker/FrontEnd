@@ -6,7 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Parent from "./components/Parent";
 import Chores from "./components/Chores";
 import './App.css';
-import Children from "./components/Children";
+import Children from './components/Children';
 
 function App() {
 
@@ -28,6 +28,11 @@ function App() {
 
           <Route path="/chores" component={Chores} />
         </Switch>
+        <Route exact path="/" component={Login} />
+        <PrivateRoute exact path="/protected" component={Parent} />
+        <Route path="/signup" component={Parent} />
+        <Route path="/children" component={Children} />
+        <Route path="/chores" component={Chores} />
       </div>
     </Router>
 
