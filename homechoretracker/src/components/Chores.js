@@ -22,7 +22,6 @@ export default function Chores(props) {
         setChores([...chores, {[e.target.name]: e.target.value}])
     }
 
-
     // Styling form
 
     const useStyles = makeStyles(theme => ({

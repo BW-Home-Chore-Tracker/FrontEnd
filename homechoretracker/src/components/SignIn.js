@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import { connect } from 'react-redux';
-import { doSignIn } from '../actions/authActions';
+import { doCreateAccount } from '../actions/authActions';
 
-import axiosWithAuth from "./axiosWithAuth";
 
+// Form and form styling
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
@@ -26,32 +26,36 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Login = props => {
-    const [user, setUser] = useState({})
+const Parent = props => {
+    const [user, setUser] = useState({});
 
-
-
-
-    const login = e => {
+    const register = e => {
         e.preventDefault();
-        props.doSignIn(user);
+        props.doCreateAccount(user);
 
 
-    };
+    }
     const handleChange = e => {
-        setUser({
-
-            ...user,
-            [e.target.name]: e.target.value
-        });
-
-    };
+        setUser({ ...user, [e.target.name]: e.target.value })
+    }
     const classes = useStyles();
-    return (
-        <div>
-            <h1>Welcome to Home Chore Tracker</h1>
-            <form className={classes.container} noValidate autoComplete="off">
 
+    return (
+        <form className={classes.container} noValidate autoComplete="off">
+
+            <div className={classes.form}>
+                {/* <div>
+                    <TextField
+                        id="first_name"
+                        className={classes.textField}
+                        label="Name"
+                        margin="normal"
+                        variant="outlined"
+                        onChange={handleChange}
+                        name="first_name"
+
+                    />
+                </div> */}
                 <div>
                     <TextField
                         id="username"
@@ -64,6 +68,20 @@ const Login = props => {
 
                     />
                 </div>
+                {/* <div>
+                    <TextField
+                        id="email"
+                        className={classes.textField}
+                        label="Email"
+                        type="email"
+                        margin="normal"
+                        variant="outlined"
+                        onChange={handleChange}
+                        name="email"
+
+
+                    />
+                </div> */}
                 <div>
                     <TextField
                         id="password-input"
@@ -77,14 +95,15 @@ const Login = props => {
                         name="password"
                     />
                 </div>
-                <Button variant="contained" className={classes.button} onClick={login}>
-                    LOG IN
+                <Button variant="contained" className={classes.button} onClick={register}>
+                    Sign Up
                 </Button>
-            </form>
-        </div>
+            </div>
+        </form>
     )
-
 }
-
 const mapStateToProps = state => ({ user: state.user, error: state.error });
-export default connect(mapStateToProps, { doSignIn })(Login);
+export default connect(mapStateToProps, { doCreateAccount })(Parent);
+
+
+

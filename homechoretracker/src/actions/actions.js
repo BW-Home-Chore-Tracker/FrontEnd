@@ -14,8 +14,8 @@ export const DELETE_CHORE = "DELETE_CHORE";
 export const getChores = () => dispatch => {
     console.log("action");
     dispatch({ type: FETCH_CHORES_START });
-    axiosWithAuth()
-        .get(`/chores`)
+    axios
+        .get(`https://chore-tracker-bw.herokuapp.com/chores`)
         .then(res =>
             dispatch({
                 type: FETCH_CHORES_SUCCESS,
@@ -25,21 +25,22 @@ export const getChores = () => dispatch => {
         .catch(err => dispatch({ type: FETCH_CHORES_FAIL, payload: err }));
 
 }
-export function addChores(id, allChores) {
-    return dispatch => {
-        axiosWithAuth()
-            .post("/chores/:id", { id, allChores })
-            .then(res =>
-                dispatch({ type: ADD_CHORE, payload: allChores }))
+export const addChores = chore => dispatch => {
+    axiosWithAuth()
+        .post('https://chore-tracker-bw.herokuapp.com/chores/:id', chore)
+        .then(res =>
 
-    }
+            dispatch({ type: ADD_CHORE, payload: res.data }))
+    console.log('chore', chore)
+
 }
+
 export const editChores = (chores) => dispatch => {
     //     event.preventDefault();
     console.log("console from editChores")
     dispatch({ type: EDIT_CHORE, id: chores.id, payload: chores });
     axios
-        .put(`${chores.id}`, chores)
+        .put(`https://chore-tracker-bw.herokuapp.com/${chores.id}`, chores)
         .then(res => {
             console.log("Res from editChores", res)
             this.props.history.push(`/chores-list/${chores.id}`);
@@ -49,7 +50,8 @@ export const editChores = (chores) => dispatch => {
             this.setError("Update Request Failed")
         }, [])
 }
-
+ //clean streaks
+ //clean score
 // export const toggleChoreEditor = () => dispatch => {
 //     console.log('toggle');
 //     dispatch({ type: TOGGLE_EDITING })
