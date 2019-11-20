@@ -3,27 +3,29 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-export default function Parent() {
 
 
-    // Form and form styling
-    const useStyles = makeStyles(theme => ({
-        container: {
-            display: 'flex',
-            flexDirection: 'column',
-        },
-        textField: {
-            marginLeft: theme.spacing(1),
-            marginRight: theme.spacing(1),
-            width: 300,
-        },
-        button: {
-            margin: theme.spacing(1),
-        },
-        input: {
-            display: 'none',
-        },
-    }));
+
+// Form and form styling
+const useStyles = makeStyles(theme => ({
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 300,
+    },
+    button: {
+        margin: theme.spacing(1),
+    },
+    input: {
+        display: 'none',
+    },
+}));
+
+const Parent = () => {
     const classes = useStyles();
 
     return (
@@ -77,7 +79,7 @@ export default function Parent() {
         </form>
     )
 }
-
+export default Parent;
 
 
 
