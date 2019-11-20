@@ -16,8 +16,8 @@ function App() {
 
     <Router>
       <div className="App">
-        <Route exact path="/" component={Login} />
-        <PrivateRoute exact path="/protected" component={Parent} />
+        {/* <Route exact path="/" component={Login} /> */}
+        {/* <PrivateRoute exact path="/protected" component={Parent} /> */}
         <Route path="/signup" component={Parent} />
         <Route path="/chores" component={Chores} />
       </div>

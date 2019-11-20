@@ -50,7 +50,7 @@ export const editChores = (chores) => dispatch => {
         }, [])
 }
 
-export const toggleChoreEditor = () => dispatch => {
-    console.log('toggle');
-    dispatch({ type: TOGGLE_EDITING })
-}
+// export const toggleChoreEditor = () => dispatch => {
+//     console.log('toggle');
+//     dispatch({ type: TOGGLE_EDITING })
+// }
