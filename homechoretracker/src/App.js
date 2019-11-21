@@ -9,6 +9,7 @@ import './App.css';
 import Children from './components/Children';
 import UpdateChoresForm from './components/UpdateChoresForm'
 import SignIn from "./components/SignIn";
+import NavBar from "./components/NavBar";
 function App() {
 
 
@@ -16,21 +17,15 @@ function App() {
   return (
 
     <Router>
+
       <div className="App">
-        <header>
-          <h1>Welcome to Chores Challenge</h1>
-          <a href="https://chorechallenge.netlify.com/">Chores Challenge</a><br />
-          <Link to="/children">Children</Link><br />
-          <Link to="/chores">Chores Challenge List</Link><br />
-          {/* <Link to="/login">Login</Link><br /> */}
-          {/* <Link to="/signup">Parent</Link> */}
-          {/* <Link to="/update-chores" component={UpdateChoresForm}>Update Chores</Link> */}
-        </header>
+        <NavBar />
         <Switch>
           <Route exact exact path="/" component={SignIn} />
+          <PrivateRoute exact path="/protected" component={Parent} />
           <Route exact path="/children" component={Children} />
           <Route path="/chores" component={Chores} />
-          <PrivateRoute exact path="/protected" component={Parent} />
+
           <Route path="/children" component={Children} />
           <Route path="/chores" component={Chores} />
           <Route path="/update-chores" component={UpdateChoresForm} />

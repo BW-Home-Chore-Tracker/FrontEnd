@@ -1,4 +1,4 @@
-//SEE AUTH ACTIONS
+//SEE AUTHACTIONS
 
 // import axiosWithAuth from '../components/axiosWithAuth';
 // //action types
@@ -26,4 +26,4 @@
 // // 	} catch (error) {
 // // 		dispatch({ type: types.DELETE_PARENT_FAIL, payload: error.response.data });
 // // 	}
-// // };
+// };

@@ -36,13 +36,9 @@ export const doCreateAccount = user => dispatch => {
 }
 export const doSignOut = () => dispatch => {
     dispatch({ type: LOGOUT_START });
-    try {
-        dispatch({ type: LOGOUT_SUCCESS });
-    } catch (error) {
-        dispatch({ type: LOGOUT_FAIL });
-    }
-};
-
+    localStorage.clear();
+    this.props.history.replace('/');
+}
 export const doWelcomeBack = token => {
     return { type: WELCOME_BACK, payload: token };
 };

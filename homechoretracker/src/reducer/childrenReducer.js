@@ -24,34 +24,34 @@ const initialState = {
     isSuccess: true,
 };
 export default (state = initialState, action) => {
-    const { type, payload } = action;
-    switch (type) {
-        case types.GET_CHILDREN_START:
+
+    switch (action.type) {
+        case GET_CHILDREN_START:
             return { ...state, isLoading: true, errors: null };
-        case types.GET_CHILDREN_SUCCESS:
-            return { ...state, isLoading: false, errors: null, children: payload };
-        case types.GET_CHILDREN_FAIL:
-            return { ...state, isLoading: false, errors: payload };
-        case types.POST_CHILDREN_START:
+        case GET_CHILDREN_SUCCESS:
+            return { ...state, isLoading: false, errors: null, children: action.payload };
+        case GET_CHILDREN_FAIL:
+            return { ...state, isLoading: false, errors: action.payload };
+        case POST_CHILDREN_START:
             return { ...state, isLoading: true, errors: null };
-        case types.POST_CHILDREN_SUCCESS:
-            const updatedPOSTChildrenList = [...state.children, payload];
-            return { ...state, isLoading: false, errors: null, children: updatedPOSTChildrenList, isSuccess: true };
-        case types.POST_CHILDREN_FAIL:
-            return { ...state, isLoading: false, errors: payload, isSuccess: false };
-        case types.PUT_CHILDREN_START:
+        case POST_CHILDREN_SUCCESS:
+            return { ...state, isLoading: false, children: action.payload };
+            return { ...state, isLoading: false, errors: null, children: action.payload, isSuccess: true };
+        case POST_CHILDREN_FAIL:
+            return { ...state, errors: action.payload, isSuccess: false };
+        case PUT_CHILDREN_START:
             return { ...state, isLoading: true, errors: null };
-        case types.PUT_CHILDREN_SUCCESS:
-            return { ...state, isLoading: false, errors: null, children: payload, isSuccess: true };
-        case types.PUT_CHILDREN_FAIL:
-            return { ...state, isLoading: false, errors: payload, isSuccess: false };
-        case types.DELETE_CHILDREN_START:
+        case PUT_CHILDREN_SUCCESS:
+            return { ...state, isLoading: false, errors: null, children: action.payload, isSuccess: true };
+        case PUT_CHILDREN_FAIL:
+            return { ...state, isLoading: false, errors: action.payload, isSuccess: false };
+        case DELETE_CHILDREN_START:
             return { ...state, isLoading: true, errors: null };
-        case types.DELETE_CHILDREN_SUCCESS:
-            const updatedChildren = state.children.filter(child => child.id !== payload);
+        case DELETE_CHILDREN_SUCCESS:
+            const updatedChildren = state.children.filter(child => child.id !== action.payload);
             return { ...state, isLoading: false, errors: null, children: updatedChildren };
-        case types.DELETE_CHILDREN_FAIL:
-            return { ...state, isLoading: false, errors: payload };
+        case DELETE_CHILDREN_FAIL:
+            return { ...state, isLoading: false, errors: action.payload };
         default:
             return state;
     }
