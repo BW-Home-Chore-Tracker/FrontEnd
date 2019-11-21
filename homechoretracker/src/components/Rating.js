@@ -42,42 +42,43 @@ class CountDown extends Component {
     // if(choreCompleted > deadline)
     // return Date;
 
-}
-render() {
-    const { days, seconds, hours, minutes, time_up } = this.state
-    return (
-        <div>
 
-            <h1>Countdown Clock</h1>
-            <div id="clockdiv">
-                <div>
-                    <span className="days" id="day">{days}</span>
-                    <div className="smalltext">Days</div>
+    render() {
+        const { days, seconds, hours, minutes, time_up } = this.state
+        return (
+            <div>
 
+                <h1>Countdown Clock</h1>
+                <div id="clockdiv">
+                    <div>
+                        <span className="days" id="day">{days}</span>
+                        <div className="smalltext">Days</div>
+
+                    </div>
+                    <div>
+                        <span className="hours" id="hour">{hours}</span>
+                        <div className="smalltext">Hours</div>
+
+                    </div>
+                    <div>
+                        <span className="minutes" id="minute">{minutes}</span>
+                        <div className="smalltext">Minutes</div>
+
+                    </div>
+                    <div>
+                        <span className="seconds" id="second">{seconds}</span>
+                        <div className="smalltext">Seconds</div>
+
+                    </div>
                 </div>
-                <div>
-                    <span className="hours" id="hour">{hours}</span>
-                    <div className="smalltext">Hours</div>
 
-                </div>
-                <div>
-                    <span className="minutes" id="minute">{minutes}</span>
-                    <div className="smalltext">Minutes</div>
-
-                </div>
-                <div>
-                    <span className="seconds" id="second">{seconds}</span>
-                    <div className="smalltext">Seconds</div>
-
-                </div>
+                <p id="demo">{time_up}</p>
             </div>
+        )
+    }
 
-            <p id="demo">{time_up}</p>
-        </div>
-    )
 }
-}
-
+export default CountDown;
 
 // export default class Timer extends Component {
 //     state = {

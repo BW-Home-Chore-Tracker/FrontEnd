@@ -2,8 +2,8 @@ import React from 'react';
 import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL, CREATE_USER_START, CREATE_USER_SUCCESS, CREATE_USER_FAIL, LOGOUT_START, LOGOUT_SUCCESS, LOGOUT_FAIL } from "../actions/authActions";
 
 const initialState = {
-    user: [],
-    username: "User1",
+
+    username: "",
     password: "",
     isAuth: false,
     isLoading: false,

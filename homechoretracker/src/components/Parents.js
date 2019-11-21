@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Link } from "react-router-dom";
+
 import { connect } from 'react-redux';
-import { doCreateAccount } from '../actions/authActions';
+import { addChildren } from '../actions/childrenActions';
 
 
 // Form and form styling
@@ -26,17 +26,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const SignIn = props => {
-    const [user, setUser] = useState({});
-
-    const register = e => {
+const Parents = props => {
+    const addChild = e => {
         e.preventDefault();
-        props.doCreateAccount(user);
-
-
-    }
-    const handleChange = e => {
-        setUser({ ...user, [e.target.name]: e.target.value })
+        props.addChildren();
     }
     const classes = useStyles();
 
@@ -44,18 +37,16 @@ const SignIn = props => {
         <form className={classes.container} noValidate autoComplete="off">
 
             <div className={classes.form}>
-                {/* <div>
+                <div>
                     <TextField
-                        id="first_name"
+                        id="name"
                         className={classes.textField}
                         label="Name"
                         margin="normal"
                         variant="outlined"
-                        onChange={handleChange}
-                        name="first_name"
 
                     />
-                </div> */}
+                </div>
                 <div>
                     <TextField
                         id="username"
@@ -63,12 +54,10 @@ const SignIn = props => {
                         label="Username"
                         margin="normal"
                         variant="outlined"
-                        onChange={handleChange}
-                        name="username"
 
                     />
                 </div>
-                {/* <div>
+                <div>
                     <TextField
                         id="email"
                         className={classes.textField}
@@ -76,12 +65,10 @@ const SignIn = props => {
                         type="email"
                         margin="normal"
                         variant="outlined"
-                        onChange={handleChange}
-                        name="email"
 
 
                     />
-                </div> */}
+                </div>
                 <div>
                     <TextField
                         id="password-input"
@@ -91,22 +78,16 @@ const SignIn = props => {
                         autoComplete="current-password"
                         margin="normal"
                         variant="outlined"
-                        onChange={handleChange}
-                        name="password"
                     />
                 </div>
-                <Button variant="contained" className={classes.button} onClick={register}>
+                <Button variant="contained" className={classes.button} onClick={addChild}>
                     Sign Up
                 </Button>
-                <Link to={location => ({ ...location, pathname: "/parent" })} />
-
-                replace: bool
             </div>
         </form>
     )
 }
 const mapStateToProps = state => ({ user: state.user, error: state.error });
-export default connect(mapStateToProps, { doCreateAccount })(SignIn);
-
+export default connect(mapStateToProps, { addChildren })(Parents);
 
 
