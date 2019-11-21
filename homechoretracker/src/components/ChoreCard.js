@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChoreCard = props => {
+function ChoreCard (props) {
     return (
       <div class="chore-container">
         {props.chores.map((chore, index) => (
