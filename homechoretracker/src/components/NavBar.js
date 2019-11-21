@@ -27,6 +27,6 @@ export default function NavBar() {
             </Link>
             <Link to="/logout">Logout</Link>
         </Typography>
-        <PrivateRoute exact path="/protected" component={Parent} />
+
     );
 }
