@@ -1,6 +1,7 @@
 import axiosWithAuth from '../components/axiosWithAuth';
 import axios from 'axios';
 
+
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
@@ -12,16 +13,19 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAIL = "LOGOUT_FAIL";
 export const WELCOME_BACK = "WELCOME_BACK";
 
-export const doSignIn = users => dispatch => {
+export const doSignIn = (users, props) => dispatch => {
     dispatch({ type: LOGIN_START })
-    axiosWithAuth().post('https://chore-tracker-bw.herokuapp.com/users/login', users)
-        .then(response =>
-            dispatch({ type: LOGIN_SUCCESS, payload: response.data })
-        )
-        .catch(error => {
-            dispatch({ type: LOGIN_FAIL, payload: error })
+    axios.post('https://chore-tracker-bw.herokuapp.com/users/login', users)
+        .then(response => {
+            dispatch({ type: LOGIN_SUCCESS, payload: response.data.token })
+            const token = response.data.token;
+            localStorage.setItem('token', token)
+            props.history.push('/children')
+                .catch(error => {
+                    dispatch({ type: LOGIN_FAIL, payload: error })
+                })
         })
-};
+}
 
 export const doCreateAccount = user => dispatch => {
     dispatch({ type: CREATE_USER_START })

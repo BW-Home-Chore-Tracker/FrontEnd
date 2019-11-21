@@ -148,9 +148,11 @@ function Children(props) {
 			</div>
 
 			<div>
-				<Button variant="contained" className={classes.button} type="submit" onClick={addChild}>
-					Add
+				<Link to="/update-children">
+					<Button variant="contained" className={classes.button} type="submit" onClick={addChild}>
+						Add
 				</Button>
+				</Link>
 			</div>
 		</form>
 

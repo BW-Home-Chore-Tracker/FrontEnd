@@ -19,6 +19,7 @@ export default function NavBar() {
             <Link href="https://chorechallenge.netlify.com/" onClick={preventDefault} className={classes.link}>
                 Home
       </Link>
+            <Link to="/login">Login</Link>
             <Link to="/children" onClick={preventDefault} className={classes.link}>
                 Children
             </Link>
