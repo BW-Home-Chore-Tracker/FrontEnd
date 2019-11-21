@@ -4,8 +4,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axiosWithAuth from "./axiosWithAuth";
+import updateChildren from './UpdateChildren';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addChildren } from '../actions/childrenActions';
 
-export default function Children() {
+function Children(props) {
 	//styling
 	const useStyles = makeStyles(theme => ({
 		container: {
@@ -54,22 +58,27 @@ export default function Children() {
 			.catch(err => console.log("Check ERROR IN CHILDREN", err));
 	}, []);
 
+
 	const handleChanges = e => {
 		setChildren({ ...children, [e.target.name]: e.target.value });
 		console.log(children);
 	};
+	const addChild = e => {
+		e.preventDefault();
+		props.addChildren(children);
+	}
 	const submitForm = e => {
 		e.preventDefault();
 		setChildren([...children]);
 	};
 
 	return (
+
 		<form
 			onSubmit={submitForm}
 			className={classes.container}
 			noValidate
-			autoComplete="off"
-		>
+			autoComplete="off">
 			<div>
 				<TextField
 					id="child_name"
@@ -80,6 +89,7 @@ export default function Children() {
 					variant="outlined"
 					placeholder="Enter child's name "
 					onChange={handleChanges}
+					name="username"
 				/>
 			</div>
 
@@ -93,6 +103,7 @@ export default function Children() {
 					variant="outlined"
 					placeholder="Enter Family Password "
 					onChange={handleChanges}
+					name="family_password"
 				/>
 			</div>
 
@@ -105,6 +116,7 @@ export default function Children() {
 					variant="outlined"
 					placeholder="Enter chore score "
 					onChange={handleChanges}
+					name="chore_score"
 				/>
 			</div>
 
@@ -117,6 +129,7 @@ export default function Children() {
 					variant="outlined"
 					placeholder="Enter chore streak "
 					onChange={handleChanges}
+					name="chore_streak"
 				/>
 			</div>
 
@@ -135,10 +148,13 @@ export default function Children() {
 			</div>
 
 			<div>
-				<Button variant="contained" className={classes.button} type="submit">
+				<Button variant="contained" className={classes.button} type="submit" onClick={addChild}>
 					Add
 				</Button>
 			</div>
 		</form>
+
 	);
 }
+const mapStateToProps = state => ({ children: state.children, error: state.error });
+export default connect(mapStateToProps, { addChildren })(Children);

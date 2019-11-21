@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { doCreateAccount } from '../actions/authActions';
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Parent = props => {
+const SignIn = props => {
     const [user, setUser] = useState({});
 
     const register = e => {
@@ -98,12 +98,15 @@ const Parent = props => {
                 <Button variant="contained" className={classes.button} onClick={register}>
                     Sign Up
                 </Button>
+                <Link to={location => ({ ...location, pathname: "/parent" })} />
+
+                replace: bool
             </div>
         </form>
     )
 }
 const mapStateToProps = state => ({ user: state.user, error: state.error });
-export default connect(mapStateToProps, { doCreateAccount })(Parent);
+export default connect(mapStateToProps, { doCreateAccount })(SignIn);
 
 
 
