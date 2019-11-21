@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import axiosWithAuth from "./axiosWithAuth";
 
 export default function Children() {
+	
 	//styling
 	const useStyles = makeStyles(theme => ({
 		container: {
@@ -57,7 +58,7 @@ export default function Children() {
 
 	const handleChanges = e => {
 		setChildren({ ...children, [e.target.name]: e.target.value });
-		console.log(children);
+		console.log("CHILDREN VALUE",children);
 	};
 	const submitForm = e => {
 		e.preventDefault();
@@ -65,6 +66,7 @@ export default function Children() {
 	};
 
 	return (
+		<>
 		<form
 			onSubmit={submitForm}
 			className={classes.container}
@@ -82,6 +84,7 @@ export default function Children() {
 					variant="outlined"
 					placeholder="Enter child's username "
 					onChange={handleChanges}
+					value={children.child_username}
 				/>
 			</div>
 
@@ -97,6 +100,7 @@ export default function Children() {
 					variant="outlined"
 					placeholder="Enter child password "
 					onChange={handleChanges}
+					value={children.child_password}
 				/>
 			</div>
 
@@ -110,6 +114,8 @@ export default function Children() {
 					variant="outlined"
 					placeholder="Enter chore score "
 					onChange={handleChanges}
+					type='number'
+					// value={children.chore_score}
 				/>
 			</div>
 
@@ -123,6 +129,8 @@ export default function Children() {
 					variant="outlined"
 					placeholder="Enter chore streak "
 					onChange={handleChanges}
+					type='number'
+					// value={children.chore_streak}
 				/>
 			</div>
 
@@ -147,5 +155,6 @@ export default function Children() {
 				</Button>
 			</div>
 		</form>
+		</>
 	);
 }
