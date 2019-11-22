@@ -11,6 +11,7 @@ import { addChildren } from '../actions/childrenActions';
 // import ChildList from'./ChildList';
 
 function Children(props) {
+	
 	//styling
 	console.log('PROPS',props)
 	const useStyles = makeStyles(theme => ({
