@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { doSignIn } from '../actions/authActions';
 
-import axiosWithAuth from "./axiosWithAuth";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -20,6 +19,8 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         margin: theme.spacing(1),
+
+
     },
     input: {
         display: 'none',
@@ -27,14 +28,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = props => {
-    const [user, setUser] = useState({})
-
-
-
+    const [user, setUser] = useState({ username: "", password: "" })
 
     const login = e => {
         e.preventDefault();
+        console.log(user)
         props.doSignIn(user);
+        props.history.push("/children");
 
 
     };
@@ -46,6 +46,17 @@ const Login = props => {
         });
 
     };
+    const handleSubmit = e => {
+        e.preventDefault();
+        axios.post('https://chore-tracker-bw.herokuapp.com/users/login', user)
+            .then(response => {
+                localStorage.setItem("token", response.data.token);
+
+            })
+
+
+    }
+
     const classes = useStyles();
     return (
         <div>

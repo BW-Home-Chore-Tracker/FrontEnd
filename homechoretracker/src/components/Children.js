@@ -4,10 +4,20 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axiosWithAuth from "./axiosWithAuth";
+import updateChildren from './UpdateChildren';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addChildren } from '../actions/childrenActions';
+// import ChildList from'./ChildList';
+
 
 export default function Children() {
 	
+
+function Children(props) {
+
 	//styling
+	console.log('PROPS',props)
 	const useStyles = makeStyles(theme => ({
 		container: {
 			display: "flex",
@@ -32,12 +42,12 @@ export default function Children() {
 		}
 	}));
 
-	const classes = useStyles();
+	const classes = useStyles(1);
 
 	const [children, setChildren] = useState([
 		{
-            child_username: "",
-            child_password:"",
+
+
 			child_id: "",
 			parent_id: "",
 			chore_score: "",
@@ -47,8 +57,12 @@ export default function Children() {
 	]);
 // console.log(children)
 	useEffect(() => {
-		axiosWithAuth()
-			.get('https://chore-tracker-bw.herokuapp.com/children/')
+
+		const token = localStorage.getItem('token');
+		axios.get("https://chore-tracker-bw.herokuapp.com/children",{
+		headers:{Authorization: token}	
+		})
+
 			.then(res => {
 				console.log(res);
 				setChildren(res.data);
@@ -56,35 +70,53 @@ export default function Children() {
 			.catch(err => console.log("Check ERROR IN CHILDREN", err));
 	}, []);
 
+
 	const handleChanges = e => {
 		setChildren({ ...children, [e.target.name]: e.target.value });
 		console.log("CHILDREN VALUE",children);
 	};
+	const addChild = e => {
+		e.preventDefault();
+		// props.addChildren(children);
+	}
+
+	// function validateForm() {
+	// 	var x = "child_name";
+	// 	if (x == "") {
+	// 	  alert("Name must be filled out");
+	// 	  return false;
+	// 	}
+	//   }
+
 	const submitForm = e => {
 		e.preventDefault();
-		
+
+		// e.validateForm();
+
 	};
 
 	return (
-		<>
+<>
+
 		<form
 			onSubmit={submitForm}
 			className={classes.container}
 			noValidate
-			autoComplete="off"
-		>
+			autoComplete="off">
 			<div>
 				<TextField
-                    id="child_username"
-                    name='child_username'
+
+					id="child_username"
 					required
 					className={classes.textField}
-					label="child username"
+					label="Child username"
 					margin="normal"
 					variant="outlined"
-					placeholder="Enter child's username "
+					placeholder="Enter child username "
 					onChange={handleChanges}
-					value={children.child_username}
+					name="username"
+					
+
 				/>
 			</div>
 
@@ -100,7 +132,9 @@ export default function Children() {
 					variant="outlined"
 					placeholder="Enter child password "
 					onChange={handleChanges}
-					value={children.child_password}
+
+					name="family_password"
+
 				/>
 			</div>
 
@@ -114,8 +148,9 @@ export default function Children() {
 					variant="outlined"
 					placeholder="Enter chore score "
 					onChange={handleChanges}
-					type='number'
-					// value={children.chore_score}
+
+					name="chore_score"
+
 				/>
 			</div>
 
@@ -129,8 +164,9 @@ export default function Children() {
 					variant="outlined"
 					placeholder="Enter chore streak "
 					onChange={handleChanges}
-					type='number'
-					// value={children.chore_streak}
+
+					name="chore_streak"
+
 				/>
 			</div>
 
@@ -150,11 +186,18 @@ export default function Children() {
 			</div>
 
 			<div>
-				<Button variant="contained" className={classes.button} type="submit">
-					Add
+				<Link to="/update-children">
+					<Button variant="contained" className={classes.button} type="submit" onClick={addChild}>
+						Add
 				</Button>
+				</Link>
 			</div>
 		</form>
-		</>
+
+
+</>
+
 	);
 }
+const mapStateToProps = state => ({ children: state.children, error: state.error });
+export default connect(mapStateToProps, { addChildren })(Children);

@@ -6,8 +6,9 @@ import App from './App';
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import choreReducer from "../src/reducer/reducer";
-const store = createStore(choreReducer, (applyMiddleware(thunk)));
+import combineReducer from "../src/reducer/index";
+import logger from 'redux-logger';
+const store = createStore(combineReducer, (applyMiddleware(thunk, logger)));
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

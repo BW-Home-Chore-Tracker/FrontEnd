@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { addChores } from "../actions/actions";
+import { editChores, deleteChore } from "../actions/actions";
+import { connect } from "react-redux";
+import axiosWithAuth from './axiosWithAuth';
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
@@ -23,8 +25,35 @@ const useStyles = makeStyles(theme => ({
 
 
 const UpdateChoresForm = props => {
+    const [choreScore, setChoreScore] = useState();
+    const [chores, setChores] = useState({
+        id: new Date(),
+        name: "",
+        due_date: "",
+        created: "",
+        completed: false,
+        editing: false
+    })
+
 
     const classes = useStyles();
+
+
+    const deleteChore = e => {
+        e.preventDefault();
+        axiosWithAuth()
+            .delete(`https://chore-tracker-bw.herokuapp.com/chores/:id`)
+            .then(res => {
+                //console.log(res))
+                props.updateChore(res.data);
+                props.history.push("/item-list");
+            })
+            .catch(err => console.log(err));
+    };
+    const handleScore = e => {
+        const scores = choreScore.filter(chore => chores.completed === !chores.completed)
+        setChoreScore(scores.legnth * 10)
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
@@ -41,6 +70,7 @@ const UpdateChoresForm = props => {
         console.log(data)
 
     }
+
 
     return (
 
@@ -113,6 +143,14 @@ const UpdateChoresForm = props => {
                         }}
                     />
                 </div>
+                <div>
+                    <Button variant="contained" className={classes.button} onClick={editChores}>
+                        EDIT
+                        </Button>
+                    <Button variant="contained" className={classes.button} onClick={deleteChore}>
+                        DELETE
+                        </Button>
+                </div>
             </div>
         </form>
 
@@ -120,5 +158,5 @@ const UpdateChoresForm = props => {
 
     )
 }
-
-export default UpdateChoresForm;
+const mapStateToProps = state => ({ chores: state.chores, error: state.error });
+export default connect(mapStateToProps, { editChores, deleteChore })(UpdateChoresForm);
