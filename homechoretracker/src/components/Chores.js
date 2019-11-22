@@ -49,7 +49,7 @@ export default function Chores() {
     return (
         <div>
             
-         {chores && chores.map(chore  => (
+         {chores.map(chore  => (
           <ChoreCard  
           key={chore.chore_id} 
           name={chore.name}

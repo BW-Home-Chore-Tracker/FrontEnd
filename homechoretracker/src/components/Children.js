@@ -8,11 +8,6 @@ import updateChildren from './UpdateChildren';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addChildren } from '../actions/childrenActions';
-// import ChildList from'./ChildList';
-
-
-export default function Children() {
-	
 
 function Children(props) {
 
@@ -46,23 +41,20 @@ function Children(props) {
 
 	const [children, setChildren] = useState([
 		{
-
-
+			child_username: "",
 			child_id: "",
 			parent_id: "",
 			chore_score: "",
 			chore_streak: "",
-			role: "child"
+			role: ""
 		}
 	]);
-// console.log(children)
-	useEffect(() => {
 
+	useEffect(() => {
 		const token = localStorage.getItem('token');
 		axios.get("https://chore-tracker-bw.herokuapp.com/children",{
 		headers:{Authorization: token}	
 		})
-
 			.then(res => {
 				console.log(res);
 				setChildren(res.data);
@@ -73,31 +65,29 @@ function Children(props) {
 
 	const handleChanges = e => {
 		setChildren({ ...children, [e.target.name]: e.target.value });
-		console.log("CHILDREN VALUE",children);
+		console.log(children);
 	};
 	const addChild = e => {
 		e.preventDefault();
 		// props.addChildren(children);
 	}
 
-	// function validateForm() {
-	// 	var x = "child_name";
-	// 	if (x == "") {
-	// 	  alert("Name must be filled out");
-	// 	  return false;
-	// 	}
-	//   }
+	function validateForm() {
+		var x = "child_name";
+		if (x === "") {
+		  alert("Name must be filled out");
+		  return false;
+		}
+	  }
 
 	const submitForm = e => {
 		e.preventDefault();
-
-		// e.validateForm();
+		e.validateForm();
 
 	};
 
 	return (
 <>
-
 		<form
 			onSubmit={submitForm}
 			className={classes.container}
@@ -105,7 +95,6 @@ function Children(props) {
 			autoComplete="off">
 			<div>
 				<TextField
-
 					id="child_username"
 					required
 					className={classes.textField}
@@ -114,68 +103,56 @@ function Children(props) {
 					variant="outlined"
 					placeholder="Enter child username "
 					onChange={handleChanges}
-					name="username"
+					name="child_username"
 					
-
 				/>
 			</div>
 
 			<div>
 				<TextField
-                    id="child_password"
-                    name='child_password'
-					type="password"
+					id="child_password"
 					required
 					className={classes.textField}
-					label="child password"
+					label="child_password"
 					margin="normal"
 					variant="outlined"
 					placeholder="Enter child password "
 					onChange={handleChanges}
-
-					name="family_password"
-
+					name="child_password"
 				/>
 			</div>
 
 			<div>
 				<TextField
-                    id="chore_score"
-                    name='chore_score'
+					id="chore_score"
 					className={classes.textField}
 					label="chore score"
 					margin="normal"
 					variant="outlined"
 					placeholder="Enter chore score "
 					onChange={handleChanges}
-
 					name="chore_score"
-
 				/>
 			</div>
 
 			<div>
 				<TextField
-                    id="chore_streak"
-                    name='chore_streak'
+					id="chore_streak"
 					className={classes.textField}
 					label="chore streak"
 					margin="normal"
 					variant="outlined"
 					placeholder="Enter chore streak "
 					onChange={handleChanges}
-
 					name="chore_streak"
-
 				/>
 			</div>
 
 			<div>
 				<TextField
-                    id="outlined-read-only-input"
-                    name='role'
+					id="outlined-read-only-input"
 					label="Read Only"
-					defaultValue="child"
+					defaultValue="Child"
 					className={classes.textField}
 					margin="normal"
 					InputProps={{
@@ -194,9 +171,7 @@ function Children(props) {
 			</div>
 		</form>
 
-
 </>
-
 	);
 }
 const mapStateToProps = state => ({ children: state.children, error: state.error });

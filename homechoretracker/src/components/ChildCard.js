@@ -5,10 +5,10 @@ function ChildCard(props){
 
     return(
         <div>
-            <h3>{props.child_username}</h3>
-            <p>{props.chore_score}</p>
-            <p>{props.chore_streak}</p>
-            <p>{props.parent_id}</p>
+            <h3>Child's Name: {props.child_username}</h3>
+            <p>Chore score: {props.chore_score}</p>
+            <p>Chore streak: {props.chore_streak}</p>
+            <p>Parent id: {props.parent_id}</p>
         
         </div>
     )
