@@ -50,17 +50,18 @@ smalltext {
 }
 
 .cardCont {
-	background-color: rgb(129, 204, 218);
+	background-color: lemonchiffon;
 	border: 1px solid silver;
 	width: 20%;
 	padding: 2%;
 	margin: 2%;
 	border-radius: 8px;
+	box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 .mainCardCont {
 	display: flex;
 	justify-content: space-around;
-	background-color: rgb(212, 192, 190);
+	background-color: thistle;
 	margin-left: 5%;
 	margin-right: 5%;
 }
@@ -69,6 +70,26 @@ smalltext {
 	border: 1px solid silver;
 	background-color: whitesmoke;
 	border-radius: 4px;
+}
+
+.textCont:hover {
+	animation: rotate-vertical 0.5s ease-out;
+	animation-iteration-count: 1;
+	background-color: crimson;
+	color: white;
+}
+@keyframes rotate-vertical {
+	0%,
+	20%,
+	40%,
+	60%,
+	80%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-5px);
+	}
 }
 
 a {
@@ -83,7 +104,7 @@ a:hover {
 .childForm {
 	width: 30%;
 	margin-top: 20%;
-	background-color: rgb(245, 192, 192);
+	background-color: rgb(245, 192, 192, 0.7);
 	margin: auto;
 	border-radius: 4px;
 }
@@ -109,4 +130,9 @@ a:hover {
 }
 button {
 	background-color: red;
+}
+h3 {
+	background-color: lightskyblue;
+	color: whitesmoke;
+	border-radius: 4px;
 }

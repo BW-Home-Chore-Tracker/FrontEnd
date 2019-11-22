@@ -78,7 +78,7 @@ function Children() {
 				noValidate
 				autoComplete="off"
 			>
-				<div className="formText">
+				<div className="formText childName">
 					<TextField
 						id="child_username"
 						required
