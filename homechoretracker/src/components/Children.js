@@ -44,7 +44,7 @@ function Children() {
 			chore_score: "",
 			chore_streak: "",
 			role: "",
-			parent_id: "35"
+			parent_id: ""
 		}
 	]);
 
@@ -131,6 +131,19 @@ function Children() {
 						placeholder="Enter chore streak "
 						onChange={handleChanges}
 						name="chore_streak"
+					/>
+				</div>
+
+				<div className="formText">
+					<TextField
+						id="parent_id"
+						className={classes.textField}
+						label="parent_id"
+						margin="normal"
+						variant="outlined"
+						placeholder="Enter Parent ID"
+						onChange={handleChanges}
+						name="parent_id"
 					/>
 				</div>
 

@@ -82,7 +82,7 @@ a:hover {
 
 .childForm {
 	width: 30%;
-	margin: 3%;
+	margin-top: 20%;
 	background-color: rgb(245, 192, 192);
 	margin: auto;
 	border-radius: 4px;
@@ -102,6 +102,9 @@ a:hover {
 }
 
 #child {
+	background-color: whitesmoke;
+}
+#parent_id {
 	background-color: whitesmoke;
 }
 button {
