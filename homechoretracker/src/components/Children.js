@@ -8,9 +8,18 @@ import updateChildren from './UpdateChildren';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addChildren } from '../actions/childrenActions';
+import jwt_decode from 'jwt-decode';
 
 function Children(props) {
 	//styling
+
+	const token = localStorage.getItem('token');
+
+	const decoded = jwt_decode(token)
+	console.log(decoded);
+
+
+
 	const useStyles = makeStyles(theme => ({
 		container: {
 			display: "flex",
@@ -39,12 +48,14 @@ function Children(props) {
 
 	const [children, setChildren] = useState([
 		{
-			child_name: "",
+			child_username: "",
 			child_id: "",
-			parent_id: "",
+			parent_id: decoded.subject,
 			chore_score: "",
 			chore_streak: "",
-			role: ""
+			role: "",
+
+
 		}
 	]);
 
@@ -65,7 +76,7 @@ function Children(props) {
 	};
 	const addChild = e => {
 		e.preventDefault();
-		props.addChildren(children);
+		props.addChildren(children)
 	}
 	const submitForm = e => {
 		e.preventDefault();
@@ -81,7 +92,7 @@ function Children(props) {
 			autoComplete="off">
 			<div>
 				<TextField
-					id="child_name"
+					id="child_username"
 					required
 					className={classes.textField}
 					label="Child's name"
@@ -89,7 +100,7 @@ function Children(props) {
 					variant="outlined"
 					placeholder="Enter child's name "
 					onChange={handleChanges}
-					name="username"
+					name="child_username"
 				/>
 			</div>
 
