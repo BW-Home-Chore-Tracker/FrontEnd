@@ -8,9 +8,11 @@ import updateChildren from './UpdateChildren';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addChildren } from '../actions/childrenActions';
+// import ChildList from'./ChildList';
 
 function Children(props) {
 	//styling
+	console.log('PROPS',props)
 	const useStyles = makeStyles(theme => ({
 		container: {
 			display: "flex",
@@ -35,11 +37,11 @@ function Children(props) {
 		}
 	}));
 
-	const classes = useStyles();
+	const classes = useStyles(1);
 
 	const [children, setChildren] = useState([
 		{
-			child_name: "",
+			child_username: "",
 			child_id: "",
 			parent_id: "",
 			chore_score: "",
@@ -49,8 +51,10 @@ function Children(props) {
 	]);
 
 	useEffect(() => {
-		axiosWithAuth()
-			.get("https://chore-tracker-bw.herokuapp.com/children")
+		const token = localStorage.getItem('token');
+		axios.get("https://chore-tracker-bw.herokuapp.com/children",{
+		headers:{Authorization: token}	
+		})
 			.then(res => {
 				console.log(res);
 				setChildren(res.data);
@@ -65,15 +69,25 @@ function Children(props) {
 	};
 	const addChild = e => {
 		e.preventDefault();
-		props.addChildren(children);
+		// props.addChildren(children);
 	}
+
+	// function validateForm() {
+	// 	var x = "child_name";
+	// 	if (x == "") {
+	// 	  alert("Name must be filled out");
+	// 	  return false;
+	// 	}
+	//   }
+
 	const submitForm = e => {
 		e.preventDefault();
-		setChildren([...children]);
+		// e.validateForm();
+
 	};
 
 	return (
-
+<>
 		<form
 			onSubmit={submitForm}
 			className={classes.container}
@@ -81,15 +95,16 @@ function Children(props) {
 			autoComplete="off">
 			<div>
 				<TextField
-					id="child_name"
+					id="child_username"
 					required
 					className={classes.textField}
-					label="Child's name"
+					label="Child username"
 					margin="normal"
 					variant="outlined"
-					placeholder="Enter child's name "
+					placeholder="Enter child username "
 					onChange={handleChanges}
 					name="username"
+					
 				/>
 			</div>
 
@@ -156,6 +171,7 @@ function Children(props) {
 			</div>
 		</form>
 
+</>
 	);
 }
 const mapStateToProps = state => ({ children: state.children, error: state.error });

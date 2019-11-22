@@ -33,7 +33,7 @@ const Login = props => {
         e.preventDefault();
         console.log(user)
         props.doSignIn(user);
-        this.props.history.push("/children");
+        props.history.push("/children");
 
 
     };
