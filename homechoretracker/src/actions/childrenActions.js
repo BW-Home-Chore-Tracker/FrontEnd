@@ -1,7 +1,9 @@
 import axiosWithAuth from '../components/axiosWithAuth';
+import axios from 'axios';
+
 //action types
 export const GET_CHILDREN_START = "GET_CHILDREN_START";
-export const GET_CHILDREN_SUCCESS = "GET_CHILDREM_SUCCESS";
+export const GET_CHILDREN_SUCCESS = "GET_CHILDREN_SUCCESS";
 export const GET_CHILDREN_FAIL = "GET_CHILDREN_FAIL";
 export const POST_CHILDREN_START = "POST_CHILDREN_START";
 export const POST_CHILDREN_SUCCESS = "POST_CHILDREN_SUCCESS";
@@ -12,10 +14,25 @@ export const PUT_CHILDREN_FAIL = "PUT_CHILDREN_FAIL";
 export const DELETE_CHILDREN_START = "DELETE_CHILDREN_START"
 export const DELETE_CHILDREN_SUCCESS = "DELETE_CHILDREN_SUCCESS";
 export const DELETE_CHILDREN_FAIL = "DELETE_CHILDREN_FAIL";
+export const getChildren = () => dispatch => {
+    console.log("action");
+    dispatch({ type: GET_CHILDREN_START });
+    axiosWithAuth()
+        .get(`https://chore-tracker-bw.herokuapp.com/chores`)
+        .then(res =>
+            dispatch({
+                type: GET_CHILDREN_SUCCESS,
+                payload: res.data
+            })
+        )
 
-export const addChildren = child => dispatch => {
-    dispatch({ PUT_CHILDREN_START });
-    axiosWithAuth().post('https://chore-tracker-bw.herokuapp.com/children', child)
+        .catch(err => dispatch({ type: GET_CHILDREN_FAIL, payload: err }));
+
+}
+
+export const addChildren = (child) => dispatch => {
+    dispatch({ type: POST_CHILDREN_START });
+    axiosWithAuth().post(`/children`, child)
         .then(response =>
             dispatch({ type: POST_CHILDREN_SUCCESS, payload: response.data }))
         .catch(error => {
@@ -33,10 +50,7 @@ export const saveEdit = (id, child) => dispatch => {
 };
 
 
-// export const deleteChildren = id => dispatch => {
-//     axiosWithAuth().delete(`/children/${id}`)
-//     dispatch({ type: types.DELETE_CHILDREN_SUCCESS, payload: id });
-// };
+
 
 export const deleteChildren = id => dispatch => {
     dispatch({ type: DELETE_CHILDREN_START });

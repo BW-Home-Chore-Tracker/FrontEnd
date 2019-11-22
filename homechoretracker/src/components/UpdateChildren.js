@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { addChildren, saveEdit, deleteChildren } from "../actions/childrenActions";
+import { saveEdit, deleteChildren } from "../actions/childrenActions";
 import axiosWithAuth from "./axiosWithAuth";
 import { connect } from 'react-redux';
+import { DELETE_CHILDREN_START, DELETE_CHILDREN_SUCCESS, DELETE_CHILDREN_FAIL } from "../actions/childrenActions";
+
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
@@ -45,9 +47,19 @@ const UpdateChildren = props => {
     };
     const updateChildren = e => {
         e.preventDefault();
-        props.addChildren(children);
         props.saveEdit(children);
     };
+
+    const deleteChildren = id => dispatch => {
+        dispatch({ type: DELETE_CHILDREN_START });
+        axiosWithAuth()
+            .delete(`http://chore-tracker-bw.herokuapp.com/children/${id}`)
+            .then(res =>
+                dispatch({ type: DELETE_CHILDREN_SUCCESS, payload: id })
+                    .catch(err => dispatch({ type: DELETE_CHILDREN_FAIL, payload: err.response })
+                    )
+            )
+    }
     const classes = useStyles();
     return (
         <form
@@ -135,14 +147,16 @@ const UpdateChildren = props => {
             </div>
 
             <div>
-                <Button variant="contained" className={classes.button} onClick={updateChildren}>
-                    Add
+                <Button onClick={saveEdit}> EDIT	</Button>
+                <Button variant="contained" className={classes.button} onClick={deleteChildren}>
+                    DELETE
 				</Button>
+
             </div>
         </form>
     );
-}
+};
 const mapStateToProps = state => ({ children: state.children, error: state.error });
-export default connect(mapStateToProps, { addChildren, saveEdit, deleteChildren })(UpdateChildren);
+export default connect(mapStateToProps, { saveEdit, deleteChildren })(UpdateChildren);
 
 

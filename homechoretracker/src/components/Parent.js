@@ -33,7 +33,7 @@ const Parent = props => {
         e.preventDefault();
         console.log(user)
         props.doCreateAccount(user);
-        props.history.push('/parents')
+        props.history.push('/children')
 
 
     }
@@ -67,7 +67,7 @@ const Parent = props => {
                         variant="outlined"
                         onChange={handleChange}
                         name="username"
-                        value={user.username}
+
 
                     />
                 </div>
@@ -96,13 +96,13 @@ const Parent = props => {
                         variant="outlined"
                         onChange={handleChange}
                         name="password"
-                        value={user.password}
+
                     />
                 </div>
                 <Button variant="contained" className={classes.button} onClick={register}>
                     Sign Up
                 </Button>
-                <Link to={location => ({ ...location, pathname: "/parent" })} />
+
 
 
             </div>

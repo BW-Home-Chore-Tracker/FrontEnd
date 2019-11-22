@@ -19,7 +19,8 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         margin: theme.spacing(1),
-        width: 150,
+
+
     },
     input: {
         display: 'none',
@@ -33,7 +34,7 @@ const Login = props => {
         e.preventDefault();
         console.log(user)
         props.doSignIn(user);
-        this.props.history.push("/children");
+        props.history.push("/children");
 
 
     };
