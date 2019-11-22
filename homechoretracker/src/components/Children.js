@@ -8,7 +8,6 @@ import updateChildren from './UpdateChildren';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addChildren } from '../actions/childrenActions';
-// import ChildList from'./ChildList';
 
 function Children(props) {
 
@@ -74,7 +73,7 @@ function Children(props) {
 	}
 
 	function validateForm() {
-		var x = "child_username";
+		var x = "child_name";
 		if (x === "") {
 		  alert("Name must be filled out");
 		  return false;
