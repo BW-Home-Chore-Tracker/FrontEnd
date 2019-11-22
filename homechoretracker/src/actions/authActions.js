@@ -20,10 +20,11 @@ export const doSignIn = (users, props) => dispatch => {
             dispatch({ type: LOGIN_SUCCESS, payload: response.data.token })
             const token = response.data.token;
             localStorage.setItem('token', token)
-            props.history.push('/children')
-                .catch(error => {
-                    dispatch({ type: LOGIN_FAIL, payload: error })
-                })
+
+
+        })
+        .catch(error => {
+            dispatch({ type: LOGIN_FAIL, payload: error })
         })
 }
 

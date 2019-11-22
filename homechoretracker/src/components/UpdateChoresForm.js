@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { addChores } from "../actions/actions";
+import { editChores, deleteChore } from "../actions/actions";
+import { connect } from "react-redux";
 import axiosWithAuth from './axiosWithAuth';
 const useStyles = makeStyles(theme => ({
     container: {
@@ -38,13 +39,13 @@ const UpdateChoresForm = props => {
     const classes = useStyles();
 
 
-    const deleteItem = e => {
+    const deleteChore = e => {
         e.preventDefault();
         axiosWithAuth()
             .delete(`https://chore-tracker-bw.herokuapp.com/chores/:id`)
             .then(res => {
                 //console.log(res))
-                props.updateItems(res.data);
+                props.updateChore(res.data);
                 props.history.push("/item-list");
             })
             .catch(err => console.log(err));
@@ -142,6 +143,14 @@ const UpdateChoresForm = props => {
                         }}
                     />
                 </div>
+                <div>
+                    <Button variant="contained" className={classes.button} onClick={editChores}>
+                        EDIT
+                        </Button>
+                    <Button variant="contained" className={classes.button} onClick={deleteChore}>
+                        DELETE
+                        </Button>
+                </div>
             </div>
         </form>
 
@@ -149,5 +158,5 @@ const UpdateChoresForm = props => {
 
     )
 }
-
-export default UpdateChoresForm;
+const mapStateToProps = state => ({ chores: state.chores, error: state.error });
+export default connect(mapStateToProps, { editChores, deleteChore })(UpdateChoresForm);

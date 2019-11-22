@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from "axios";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -7,45 +7,45 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ChoreCard from "./ChoreCard";
 
 export default function Chores() {
-    const [chores, setChores] = useState({name: "", chore_score: "", due_date: "", completed: ""})
-    
+    const [chores, setChores] = useState({ name: "", chore_score: "", due_date: "", completed: "" })
+
     useEffect(() => {
         axios.get('https://chore-tracker-bw.herokuapp.com/chores')
-        .then(response => {
-            console.log(response);
-            setChores(response.data)
-        })
-        .catch(error => {
-            console.log(error)
-        })
+            .then(response => {
+                console.log(response);
+                setChores(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }, [])
 
     const addChore = e => {
         e.preventDefault();
-		setChores([...chores, {name: "", chore_score: "", due_date: "", completed: ""}]);
-      };
+        setChores([...chores, { name: "", chore_score: "", due_date: "", completed: "" }]);
+    };
 
     // Styling form
 
     const useStyles = makeStyles(theme => ({
         container: {
-          display: 'flex',
-          flexDirection: 'column',
+            display: 'flex',
+            flexDirection: 'column',
         },
         textField: {
-          marginLeft: theme.spacing(1),
-          marginRight: theme.spacing(1),
-          width: 300,
+            marginLeft: theme.spacing(1),
+            marginRight: theme.spacing(1),
+            width: 300,
         },
         button: {
             margin: theme.spacing(1),
-          },
-          input: {
+        },
+        input: {
             display: 'none',
-          },
-      }));
-      const classes = useStyles();
-      
+        },
+    }));
+    const classes = useStyles();
+
     return (
         <div>
             <form name="choreForm" className={classes.container} noValidate autoComplete="off" onSubmit={validateForm} >
@@ -64,7 +64,7 @@ export default function Chores() {
                         />
                     </div>
                     <div>
-                    {/* <TextField
+                        {/* <TextField
                             id="description"
                             className={classes.textField}
                             multiline
@@ -78,7 +78,7 @@ export default function Chores() {
                     /> */}
                     </div>
                     <div>
-                    {/* <TextField
+                        {/* <TextField
                             id="childs_name"
                             className={classes.textField}
                             label="Child's Name"
@@ -123,7 +123,7 @@ export default function Chores() {
                             name="completed"
                             color="primary"
                             inputProps={{
-                            'aria-label': 'secondary checkbox',
+                                'aria-label': 'secondary checkbox',
                             }}
                         /> Completed
                     </div>
@@ -133,7 +133,7 @@ export default function Chores() {
                 </div>
             </form>
             <ChoreCard />
-            </div>
+        </div>
     )
 }
 
@@ -141,7 +141,7 @@ export default function Chores() {
 function validateForm() {
     const x = document.forms["choreForm"]["name"].value;
     if (x == "") {
-      alert("Name must be filled out");
-      return false;
+        alert("Name must be filled out");
+        return false;
     }
-  }
+}

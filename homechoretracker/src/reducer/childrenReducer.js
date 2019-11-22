@@ -5,18 +5,23 @@ import {
 const initialState = {
     children: [
         {
+            child_username: "",
+            child_id: "",
+            parent_id: "",
+            chore_score: "",
+            chore_streak: "",
+            role: "",
+
+            // "child_id": 3,
+            // "parent_id": 1,
+            // "chore_id": 1,
+            // "child_username": "testchild5",
 
 
-            "child_id": 3,
-            "parent_id": 1,
-            "chore_id": 1,
-            "child_username": "testchild5",
-            "child_password": null,
-            "messages": "tester",
-            "chore_streak": 0,
-            "chore_score": 10,
-            "bonus_points": null,
-            "role": "child"
+            // "chore_streak": 0,
+            // "chore_score": 10,
+
+            // "role": "child"
         },
     ],
     isLoading: false,
@@ -36,7 +41,6 @@ export default (state = initialState, action) => {
             return { ...state, isLoading: true, errors: null };
         case POST_CHILDREN_SUCCESS:
             return { ...state, isLoading: false, children: action.payload };
-            return { ...state, isLoading: false, errors: null, children: action.payload, isSuccess: true };
         case POST_CHILDREN_FAIL:
             return { ...state, errors: action.payload, isSuccess: false };
         case PUT_CHILDREN_START:
