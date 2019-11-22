@@ -11,7 +11,7 @@ import { addChildren } from '../actions/childrenActions';
 // import ChildList from'./ChildList';
 
 function Children(props) {
-	
+
 	//styling
 	console.log('PROPS',props)
 	const useStyles = makeStyles(theme => ({
@@ -73,17 +73,17 @@ function Children(props) {
 		// props.addChildren(children);
 	}
 
-	// function validateForm() {
-	// 	var x = "child_name";
-	// 	if (x == "") {
-	// 	  alert("Name must be filled out");
-	// 	  return false;
-	// 	}
-	//   }
+	function validateForm() {
+		var x = "child_username";
+		if (x === "") {
+		  alert("Name must be filled out");
+		  return false;
+		}
+	  }
 
 	const submitForm = e => {
 		e.preventDefault();
-		// e.validateForm();
+		e.validateForm();
 
 	};
 
@@ -104,22 +104,22 @@ function Children(props) {
 					variant="outlined"
 					placeholder="Enter child username "
 					onChange={handleChanges}
-					name="username"
+					name="child_username"
 					
 				/>
 			</div>
 
 			<div>
 				<TextField
-					id="family_password"
+					id="child_password"
 					required
 					className={classes.textField}
-					label="family password"
+					label="child_password"
 					margin="normal"
 					variant="outlined"
-					placeholder="Enter Family Password "
+					placeholder="Enter child password "
 					onChange={handleChanges}
-					name="family_password"
+					name="child_password"
 				/>
 			</div>
 
