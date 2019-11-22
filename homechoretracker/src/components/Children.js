@@ -8,6 +8,12 @@ import updateChildren from "./UpdateChildren";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addChildren } from "../actions/childrenActions";
+import {
+	FormControl,
+	FormHelperText,
+	Input,
+	InputLabel
+} from "@material-ui/core";
 
 function Children() {
 	//styling
@@ -53,8 +59,16 @@ function Children() {
 		console.log(children);
 	};
 
+	function validateForm() {
+		var x = document.forms["formValid"]["child_username"].value;
+		if (x === "") {
+			alert("Child username must be filled out!");
+		}
+	}
+
 	const submitForm = e => {
 		e.preventDefault();
+		validateForm();
 	};
 
 	useEffect(() => {
@@ -72,12 +86,7 @@ function Children() {
 
 	return (
 		<div className="childForm">
-			<form
-				onSubmit={submitForm}
-				className={classes.container}
-				noValidate
-				autoComplete="off"
-			>
+			<form onSubmit={submitForm} name="formValid">
 				<div className="formText childName">
 					<TextField
 						id="child_username"
@@ -89,7 +98,6 @@ function Children() {
 						placeholder="Enter child username "
 						onChange={handleChanges}
 						name="child_username"
-						value=""
 					/>
 				</div>
 
@@ -166,7 +174,7 @@ function Children() {
 						<Button
 							variant="contained"
 							className={classes.button}
-							type="submit"
+							onClick={validateForm}
 						>
 							Add
 						</Button>
