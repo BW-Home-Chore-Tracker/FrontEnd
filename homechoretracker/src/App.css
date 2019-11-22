@@ -48,3 +48,62 @@ smalltext {
 	padding-top: 5px;
 	font-size: 16px;
 }
+
+.cardCont {
+	background-color: rgb(129, 204, 218);
+	border: 1px solid silver;
+	width: 20%;
+	padding: 2%;
+	margin: 2%;
+	border-radius: 8px;
+}
+.mainCardCont {
+	display: flex;
+	justify-content: space-around;
+	background-color: rgb(212, 192, 190);
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.textCont {
+	border: 1px solid silver;
+	background-color: whitesmoke;
+	border-radius: 4px;
+}
+
+a {
+	margin: 2%;
+	text-decoration: none;
+	font-size: 18px;
+}
+a:hover {
+	color: hotpink;
+}
+
+.childForm {
+	width: 30%;
+	margin: 3%;
+	background-color: rgb(245, 192, 192);
+	margin: auto;
+	border-radius: 4px;
+}
+
+#child_username {
+	background-color: whitesmoke;
+}
+#chores {
+	background-color: whitesmoke;
+}
+#chore_score {
+	background-color: whitesmoke;
+}
+#chore_streak {
+	background-color: whitesmoke;
+}
+
+#child {
+	background-color: whitesmoke;
+}
+button {
+	background-color: red;
+}
